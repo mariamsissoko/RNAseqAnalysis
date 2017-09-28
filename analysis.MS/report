@@ -1,0 +1,55 @@
+1.Download manually the 4 datasets
+ERR990557
+ERR990558
+ERR990559
+ERR990560
+
+2.Download fastq files with a bash script downloadFastq.sh
+To run it $ bash downloadFastq.sh repertoryOfDatasets
+
+3.Unzip manually fastq files
+ERR990557.fastq
+ERR990558.fastq
+ERR990559.fastq
+ERR990560.fastq
+
+4.Select the first 8 000 000 reads in each fastq files with a python script selectReads.py
+Creation of sample files 
+ERR990557s.fastq
+ERR990558s.fastq
+ERR990559s.fastq
+ERR990560s.fastq
+The principal fonction fonction selectReadForAllFiles takes the list of fastq files and the number of reads wanted in each sample files 
+
+5.Align reads datasets to reference genomes with bowtie
+Prerequisite : download Drosophila melanogaster index and unzip it
+Use default parameters
+To run bowtie 
+$ ./bowtie -S d_melanogaster_fb5_22 fastqFile >outputFile
+Creation of sam files 
+ERR990557s.bowtie.sam
+ERR990558s.bowtie.sam
+ERR990559s.bowtie.sam
+ERR990560s.bowtie.sam
+
+6.Count reads aligning to genome's genes with HTSeq
+Prerequisite : download and unzip gtf file of Drosophila melanogaster
+To run HTSeq 
+$ python -m HTSeq.scripts.count samFile gtfFile >outputFile
+Creation of 4 files, folder countFiles with theses files given  
+ERR990557s.count.txt
+ERR990558s.count.txt
+ERR990559s.count.txt
+ERR990560s.count.txt
+
+7.Differential analysis with DESeq2 package on R
+Script differentialAnalysis.R
+Graphs reporting analysis in folder differentialAnalysisGraphs
+file with differentially expressed gene resultOfDifferantialAnalysis.txt
+
+
+
+
+
+
+
